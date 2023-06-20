@@ -321,8 +321,12 @@ else:
                     print(f"{enemy.name}: {enemy_retrival_points} pkt")
                     move_count2(move)
                     move += 1
+                    if move == 5:
+                        k = False
+                    else:
+                        pass
                 result(your_retrival_points, enemy_retrival_points)
-                break
+            break
 
         elif fight == "CHECK":
             print("\nWyniki to: ")
