@@ -97,6 +97,7 @@ def move_count2(move):
         print("\nKoniec walki")
 
 def attack(a):
+    k = 0
     if a == "e":
         attack_list = list(ruchy[2].keys())
         w = random.randint(0, 2)
@@ -138,7 +139,7 @@ def result(your_retrival_points,enemy_retrival_points):
         space_rocks = SpaceRocks() #zmienna space_rocks przechowuje obiekt klasy, zdefiniowane w  klasie SpaceRocks
         space_rocks.main_loop()
     else:
-        print("\nNiestety przegrałeś. Może spróbuj jeszcze raz?")
+        print("\nNiestety przegrałeś.")
 
 
 #początek, czyta plik
@@ -292,30 +293,36 @@ else:
             attack(a)
 
             while move < 5:
-                # kalman
-                a = "k"
-                print(f"\nJeśli wybierasz atak, wpisz a\n"
-                      f"Jeśli wybierasz obronę, wpisz o")
-                choice = input(">> ").lower()
-                if choice == "a":
-                    attack(a)
-                elif choice == "o":
-                    obrona(a)
+                k = True
+                while k == True:
+                    # kalman
+                    a = "k"
+                    print(f"\nJeśli wybierasz atak, wpisz a\n"
+                          f"Jeśli wybierasz obronę, wpisz o\n"
+                          f"Jeśli wybierzesz niewłaściwy ruch to stracisz rundę!\n")
+                    choice = input(">> ").lower()
+                    if choice == "a":
+                        attack(a)
+                    elif choice == "o":
+                        obrona(a)
+                    else:
+                        print("Wybrałeś niewłaściwy ruch")
+                        k = True
 
-                # enemy
-                a = "e"
-                s = random.randint(1, 2)
-                if s == 1:
-                    obrona(a)
-                elif s == 2:
-                    attack(a)
+                    # enemy
+                    a = "e"
+                    s = random.randint(1, 2)
+                    if s == 1:
+                        obrona(a)
+                    elif s == 2:
+                        attack(a)
 
-                print(f"\nKalman: {your_retrival_points} pkt")
-                print(f"{enemy.name}: {enemy_retrival_points} pkt")
-                move_count2(move)
-                move += 1
-            result(your_retrival_points, enemy_retrival_points)
-            break
+                    print(f"\nKalman: {your_retrival_points} pkt")
+                    print(f"{enemy.name}: {enemy_retrival_points} pkt")
+                    move_count2(move)
+                    move += 1
+                result(your_retrival_points, enemy_retrival_points)
+                break
 
         elif fight == "CHECK":
             print("\nWyniki to: ")
